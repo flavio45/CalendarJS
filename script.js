@@ -19,6 +19,10 @@ const weekdays = [
 function load() {
   const dt = new Date();
 
+  if (nav !== 0) {
+    dt.setMonth(new Date().getMonth() + nav);
+  } // if
+
   const day = dt.getDate();
   const month = dt.getMonth();
   const year = dt.getFullYear();
@@ -56,7 +60,7 @@ function load() {
 
     calendar.append(daySquare);
   } // for
-} // load
+} // load()
 
 function initButtons() {
   document.getElementById("nextButton").addEventListener("click", () => {
