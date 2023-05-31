@@ -33,5 +33,30 @@ function load() {
     day: "numeric",
   });
 
-  const paddingDays = weekdays.indexOf(dateString.split(",")[0]);
-}
+  const paddingDays = weekdays.indexOf(dateString.split(", ")[0]);
+
+  document.getElementById("monthDisplay").innerText = `${dt.toLocaleDateString(
+    "en-us",
+    { month: "long" }
+  )} ${year}`;
+
+  for (let i = 1; i <= paddingDays + daysInMonth; i++) {
+    const daySquare = document.createElement("div");
+    daySquare.classList.add("day");
+
+    if (i > paddingDays) {
+      daySquare.innerText = i - paddingDays;
+
+      daySquare.addEventListener("click", () => console.log("click"));
+    } else {
+      daySquare.classList.add("padding");
+    } // if
+
+    calendar.append(daySquare);
+  } // for
+} // load
+
+function initButtons() {} // initButtons()
+
+initButtons();
+load();
