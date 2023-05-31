@@ -40,6 +40,8 @@ function load() {
     { month: "long" }
   )} ${year}`;
 
+  calendar.innerHTML = "";
+
   for (let i = 1; i <= paddingDays + daysInMonth; i++) {
     const daySquare = document.createElement("div");
     daySquare.classList.add("day");
@@ -56,7 +58,17 @@ function load() {
   } // for
 } // load
 
-function initButtons() {} // initButtons()
+function initButtons() {
+  document.getElementById("nextButton").addEventListener("click", () => {
+    nav++;
+    load();
+  });
+
+  document.getElementById("backButton").addEventListener("click", () => {
+    nav--;
+    load();
+  });
+} // initButtons()
 
 initButtons();
 load();
