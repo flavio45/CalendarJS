@@ -71,7 +71,7 @@ function load() {
       daySquare.innerText = i - paddingDays;
 
       daySquare.addEventListener("click", () =>
-        openModal("${month + 1}/${i - paddingDays}/${year}")
+        openModal(`${month + 1}/${i - paddingDays}/${year}`)
       );
     } else {
       daySquare.classList.add("padding");
@@ -89,6 +89,22 @@ function closeModal() {
   load();
 } // closeModal()
 
+function saveEvent() {
+  if (eventTitleInput.value) {
+    eventTitleInput.classList.remove("error");
+
+    events.push({
+      date: clicked,
+      title: eventTitleInput.value,
+    });
+
+    localStorage.setItem("events", JSON.stringify(events));
+    closeModal();
+  } else {
+    eventTitleInput.classList.add("error");
+  } // if
+} // saveEvent()
+
 function initButtons() {
   document.getElementById("nextButton").addEventListener("click", () => {
     nav++;
@@ -100,8 +116,10 @@ function initButtons() {
     load();
   });
 
-  document.getElementById("saveButton", () => {});
-  document.getElementById("cancelButton", closeModal);
+  // document.getElementById("saveButton", () => {});
+  document.getElementById("saveButton").addEventListener("click", saveEvent);
+
+  document.getElementById("cancelButton").addEventListener("click", closeModal);
 } // initButtons()
 
 initButtons();
